@@ -94,11 +94,7 @@
   transition: all 0.2s ease;
 }
 
-/* .btn:hover {
-  transform: translateY(-2px);
-}
- */
-/* Loading / Disabled */
+
 .btn:disabled {
   opacity: 0.65;
   cursor: not-allowed;
@@ -109,12 +105,11 @@
   margin-top: 15px;
 }
 
-/* /* Responsive table */
 .table-responsive {
   overflow-x: auto;
 }
- */
-/* Small adjustments */
+ 
+
 .text-center {
   text-align: center !important;
 }
