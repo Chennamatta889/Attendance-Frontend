@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-app-frontend
+  labels:
+    app: react-app-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-app-frontend
+  template:
+    metadata:
+      labels:
+        app: react-app-frontend
+    spec:
+      containers:
+        - name: react-app-frontend
+          image: chenna12356/rdd:frontend_final
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-app-frontend-service
+  labels:
+    app: react-app-frontend
+spec:
+  type: LoadBalancer
+  selector:
+    app: react-app-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
