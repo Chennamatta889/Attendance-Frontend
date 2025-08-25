@@ -1,0 +1,59 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+  }
+  
+  /* Top section: pie chart left, cards right */
+  .dashboard-top {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  /* Pie chart container */
+  .dashboard-left {
+    flex: 1 1 400px;
+    max-width: 500px;
+  }
+  
+  /* Chart card styling */
+  .dashboard-left .card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  }
+  
+  /* Right side dashboard cards container */
+  .dashboard-right {
+    flex: 2 1 600px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  /* Individual cards styling */
+  .dashboard-right .dashboard-card {
+    flex: 1 1 calc(50% - 20px);
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .dashboard-right .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+  
+  /* Pie chart title */
+  .dashboard-left .card h5 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  

@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:7222/api/Attendance'; 
+const BASE_URL = process.env.REACT_APP_API_BASE_URL ;
+
+const API_URL = `${BASE_URL}/Attendance`;
 
 export const getAttendanceByEmployee = (employeeId) =>
     axios.get(`${API_URL}/employee/${employeeId}`);

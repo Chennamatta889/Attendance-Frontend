@@ -1,75 +1,93 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import './Navbar.css'
+
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear auth data
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("email");
+
+    // Redirect to login page
+    navigate("/login");
+    window.location.reload();
+  };
+
   return (
-    <nav style={styles.nav}>
-      <div style={styles.logo}>
-        <NavLink to="/" style={styles.link}>🏢 AttendanceApp</NavLink>
-      </div>
-      <div style={styles.menu}>
-        <NavLink 
-          to="/" 
-          style={({ isActive }) => isActive ? styles.activeLink : styles.link}
-        >
-          Employees
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
+      <div className="container-fluid">
+        {/* Brand */}
+        <NavLink className="navbar-brand fw-bold" to="/">
+         
+        🏢 Sri Rudra Infra Developers
         </NavLink>
-        <NavLink 
-          to="/create" 
-          style={({ isActive }) => isActive ? styles.activeLink : styles.link}
+
+        
+
+        {/* Toggler */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          Add Employee
-        </NavLink>
-        <NavLink 
-          to="/attendance/mark" 
-          style={({ isActive }) => isActive ? styles.activeLink : styles.link}
-        >
-          Mark Attendance
-        </NavLink>
-        <NavLink 
-          to="/attendance/all" 
-          style={({ isActive }) => isActive ? styles.activeLink : styles.link}
-        >
-          All Attendance
-        </NavLink>
-        <NavLink 
-          to="/attendance/employee" 
-          style={({ isActive }) => isActive ? styles.activeLink : styles.link}
-        >
-          Employee Attendance
-        </NavLink>
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        {/* Menu items */}
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active fw-semibold text-info" : "")
+                }
+              >
+                Employees
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/create"
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active fw-semibold text-info" : "")
+                }
+              >
+                Add Employee
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/attendance/mark"
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active fw-semibold text-info" : "")
+                }
+              >
+                Mark Attendance
+              </NavLink>
+            </li>
+
+            {/* Logout Button */}
+            <li className="nav-item">
+  <button onClick={handleLogout} className="btn btn-logout ms-3">
+    🚪 Logout
+  </button>
+</li>
+
+          </ul>
+        </div>
       </div>
     </nav>
   );
-};
-
-const styles = {
-  nav: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
-    padding: '10px 20px',
-    color: '#fff',
-  },
-  logo: {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-  },
-  menu: {
-    display: 'flex',
-    gap: '20px',
-  },
-  link: {
-    color: '#fff',
-    textDecoration: 'none',
-    fontWeight: '500',
-  },
-  activeLink: {
-    color: '#1abc9c',
-    textDecoration: 'underline',
-    fontWeight: '600',
-  },
 };
 
 export default Navbar;

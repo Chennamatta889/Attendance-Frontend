@@ -1,34 +1,39 @@
 // SendReportButton.js
 import React from "react";
-import { sendAdvanceEmail, sendMonthlyReportEmail } from "../services/emailService";
+import { sendMonthlyReportEmail } from "../services/emailService";
 
-const SendReportButton = ({ employee, advances = [], report }) => {
+const SendReportButton = ({ employee, report }) => {
   const handleSend = async () => {
+    if (!report) return alert("No report data available!");
+
     try {
-      // 1️⃣ Send advance emails (if any)
-      if (advances.length > 0) {
-        for (const adv of advances) {
-          await sendAdvanceEmail(employee, adv);
-        }
-        console.log("✅ Advance emails sent!");
-      }
+      // Send the monthly report including advances
+      await sendMonthlyReportEmail(employee, report);
+      console.log("✅ Monthly report email sent!");
 
-      // 2️⃣ Send monthly report email
-      if (report) {
-        await sendMonthlyReportEmail(employee, report);
-        console.log("✅ Monthly report email sent!");
-      }
-
-      alert("All emails sent successfully!");
+      alert("Report email sent successfully!");
     } catch (error) {
-      console.error("❌ Error sending emails:", error);
-      alert("Failed to send emails. Check console for details.");
+      console.error("❌ Error sending report email:", error);
+      alert("Failed to send the report. Check console for details.");
     }
   };
 
   return (
-    <button onClick={handleSend}>
-      Send Reports
+    <button
+      onClick={handleSend}
+      style={{
+        backgroundColor: "#3498db",
+        color: "#fff",
+        padding: "10px 25px 10px 10px",
+        border: "none",
+        marginTop: "1px",
+        display: "flex",
+        width: "fit-content",
+        borderRadius: "5px",
+        cursor: "pointer",
+      }}
+    >
+      Send Monthly Report
     </button>
   );
 };
