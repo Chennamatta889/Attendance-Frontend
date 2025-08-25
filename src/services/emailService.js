@@ -1,12 +1,18 @@
 // src/services/emailService.js
 import emailjs from "emailjs-com";
 
-const SERVICE_ID = "service_rh6zmqp";
+const SERVICE_ID = "service_ebqay1l";
 const ADVANCE_TEMPLATE_ID = "template_9azgqmw";
-const REPORT_TEMPLATE_ID = "template_yer0bzs"; // 👈 your report email template
+const REPORT_TEMPLATE_ID = "template_yer0bzs"; // your report email template
 const PUBLIC_KEY = "pqF3g7EZkoa9HWqcR";
 
-// Send advance email
+// Month names array
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+// Send advance email (if needed separately)
 export const sendAdvanceEmail = (employee, advance) => {
   const templateParams = {
     to_email: employee.email,
@@ -23,20 +29,35 @@ export const sendAdvanceEmail = (employee, advance) => {
   return emailjs.send(SERVICE_ID, ADVANCE_TEMPLATE_ID, templateParams, PUBLIC_KEY);
 };
 
-// Send monthly report email
+// Send monthly report email (with advance details)
 export const sendMonthlyReportEmail = (employee, report) => {
+  const advancesHtml = report.advances && report.advances.length > 0
+    ? report.advances
+        .map(
+          (adv) =>
+            `<tr style="background:#f9fafd;">
+              <td style="padding:10px;">${new Date(adv.dateGiven).toLocaleDateString("en-IN")}</td>
+              <td style="padding:10px;">${adv.reason || "N/A"}</td>
+              <td style="padding:10px; text-align:right;">₹${adv.amount}</td>
+            </tr>`
+        )
+        .join("")
+    : `<tr><td colspan="3" style="padding:10px; text-align:center;">No advances</td></tr>`;
+
   const templateParams = {
     to_email: employee.email,
-    id : employee.employeeId,
+    employeeId: employee.employeeId,
     name: employee.name,
-    month: report.month,
+    monthName: monthNames[report.month - 1], // 👈 Month as name
     year: report.year,
+    dailyWage: report.dailyWage,
     presentDays: report.presentDays,
     halfDays: report.halfDays,
     absents: report.absents,
     grossSalary: report.grossSalary,
     advanceDeduction: report.advanceDeduction,
     netSalary: report.netSalary,
+    advanceDetails: advancesHtml, // 👈 HTML rows
   };
 
   return emailjs.send(SERVICE_ID, REPORT_TEMPLATE_ID, templateParams, PUBLIC_KEY);

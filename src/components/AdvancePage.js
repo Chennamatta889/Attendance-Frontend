@@ -3,8 +3,17 @@ import axios from "axios";
 import "./ManageAdvances.css"; 
 import { sendAdvanceEmail } from "../services/emailService"; // ✅ import email service
 
-const API_URL = "https://localhost:7222/api/Advance";
-const EMPLOYEE_API = "https://localhost:7222/api/Employees";
+// ✅ Centralized Base URL
+const BASE_URL = process.env.REACT_APP_API_BASE_URL ;
+const API_URL = `${BASE_URL}/Advance`;
+const EMPLOYEE_API = `${BASE_URL}/Employees`;
+
+// ✅ Helper to get auth headers
+const authHeaders = () => ({
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+});
 
 const ManageAdvances = () => {
   const [employees, setEmployees] = useState([]);
@@ -16,11 +25,12 @@ const ManageAdvances = () => {
   const [referenceNo, setReferenceNo] = useState("");
   const [loading, setLoading] = useState(false);
 
+  
   // ✅ Fetch employees once
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const res = await axios.get(EMPLOYEE_API);
+        const res = await axios.get(EMPLOYEE_API, authHeaders());
         setEmployees(res.data || []);
       } catch (err) {
         console.error("Error fetching employees:", err);
@@ -33,7 +43,7 @@ const ManageAdvances = () => {
   // ✅ Fetch advances for employee
   const fetchAdvances = async (employeeId) => {
     try {
-      const res = await axios.get(`${API_URL}/employee/${employeeId}`);
+      const res = await axios.get(`${API_URL}/employee/${employeeId}`, authHeaders());
       setAdvances(res.data || []);
     } catch (err) {
       console.error("Error fetching advances:", err);
@@ -57,14 +67,18 @@ const ManageAdvances = () => {
 
     setLoading(true);
     try {
-      await axios.post(API_URL, {
-        employeeId: parseInt(selectedEmployee),
-        amount: parseFloat(amount),
-        reason: reason?.trim() || null,
-        dateGiven: dateGiven,
-        referenceNo: referenceNo?.trim() || null,
-        status: "Pending",
-      });
+      await axios.post(
+        API_URL,
+        {
+          employeeId: parseInt(selectedEmployee),
+          amount: parseFloat(amount),
+          reason: reason?.trim() || null,
+          dateGiven: dateGiven,
+          referenceNo: referenceNo?.trim() || null,
+          status: "Pending",
+        },
+        authHeaders()
+      );
 
       // 🔎 find selected employee details
       const employee = employees.find(

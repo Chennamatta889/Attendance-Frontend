@@ -1,0 +1,77 @@
+/* ---------- Brand ---------- */
+.navbar-brand {
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+    color: #f8f9fa !important;
+    transition: color 0.3s ease;
+  }
+  .navbar-brand:hover {
+    color: #0dcaf0 !important;
+  }
+  
+  /* ---------- Nav links ---------- */
+  .nav-link {
+    color: #adb5bd !important;
+    margin: 0 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  .nav-link:hover {
+    color: #f8f9fa !important;
+    transform: translateY(-1px);
+  }
+  .nav-link.active {
+    color: #0dcaf0 !important;
+    border-bottom: 2px solid #0dcaf0;
+    padding-bottom: 4px;
+  }
+  
+  /* ---------- Logout (styled like button but soft) ---------- */
+  .btn-logout {
+    border-radius: 20px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border: 1px solid #0dcaf0;
+    color: #0dcaf0;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+  .btn-logout:hover {
+    background-color: #0dcaf0;
+    color: #fff;
+    transform: scale(1.03);
+  }
+  
+  /* ---------- Navbar background slight gradient ---------- */
+  .navbar-dark.bg-dark {
+    background: linear-gradient(90deg, #212529, #1a1d20);
+  }
+  
+  /* ---------- Responsive tweaks ---------- */
+  @media (max-width: 991px) {
+    .navbar-nav {
+      text-align: center;
+      margin-top: 12px;
+    }
+    .nav-link {
+      margin: 6px 0;
+      display: block;
+      font-size: 1rem;
+    }
+    .btn-logout {
+      margin: 10px auto;
+      display: block;
+      width: 80%;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .navbar-brand {
+      font-size: 1rem;
+    }
+    .btn-logout {
+      font-size: 0.9rem;
+      padding: 5px 14px;
+    }
+  }
+  

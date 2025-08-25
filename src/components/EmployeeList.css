@@ -1,0 +1,142 @@
+/* Container */
+.container {
+    max-width: 1200px;
+  }
+  
+  /* Heading */
+  h2 {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  /* Card styling */
+  .card {
+    border-radius: 14px;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Card title */
+  .card-title {
+    font-weight: 600;
+    color: #34495e;
+  }
+  
+  /* Buttons */
+  .btn-outline-primary {
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #4a90e2;
+    color: #fff;
+    border-color: #4a90e2;
+  }
+  
+  /* Softer delete button */
+  .btn-delete {
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #ff6b6b;   /* coral red */
+    color: #fff;
+    border: none;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-delete:hover {
+    background-color: #e63946;  /* darker coral */
+    color: #fff;
+  }
+  
+  /* Search bar */
+  .input-group-text {
+    background-color: #f0f2f5;
+    border-right: none;
+  }
+  
+  .form-control {
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+  }
+  
+  /* Empty state */
+  .text-center {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+  }
+  
+  /* ---------------------- */
+  /* Responsive adjustments */
+  /* ---------------------- */
+  
+  /* Tablets */
+/*   @media (max-width: 992px) {
+    .card {
+      margin-bottom: 20px;
+    }
+  
+    .card-body {
+      font-size: 15px;
+    }
+  } */
+  
+  /* Mobile */
+ /*  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  
+    .card-body {
+      padding: 1rem;
+      font-size: 14px;
+    }
+  
+    .card-footer {
+      flex-direction: column;
+      gap: 8px;
+    }
+  
+    .card-footer .btn {
+      width: 100%;
+    }
+  
+    .input-group {
+      flex-direction: column;
+    }
+  
+    .input-group-text {
+      border-radius: 6px 6px 0 0;
+      border-right: 1px solid #ced4da;
+    }
+  
+    .form-control {
+      border-radius: 0 0 6px 6px;
+      border-left: 1px solid #ced4da;
+    }
+  }
+   */
+  /* Extra small screens */
+  /* @media (max-width: 480px) {
+    h2 {
+      font-size: 1.3rem;
+    }
+  
+    .card-title {
+      font-size: 1rem;
+    }
+  
+    .card-body p {
+      font-size: 13px;
+    }
+  }
+   */
