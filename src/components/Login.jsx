@@ -109,7 +109,7 @@ const Login = ({ onLoginSuccess }) => {
           <small className="text-light">
             Don’t have an account?{" "}
             <a href="/register" className="text-warning fw-semibold">
-              Register
+              Registerrr
             </a>
           </small>
         </div>
